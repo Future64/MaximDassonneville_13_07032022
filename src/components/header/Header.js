@@ -10,8 +10,9 @@ import {
 import { useParams, useLocation, useMatch } from 'react-router-dom'
 import './Header.css'
 import argentBankLogo from '../../assets/argentBankLogo.png'
+import SignOut from '../signOut/SignOut'
 
-const Header = () => {
+const Header = (props) => {
   return (
     <nav className="main-nav">
       <a className="main-nav-logo" href="/">
@@ -27,6 +28,7 @@ const Header = () => {
           <i className="fa fa-user-circle"></i>
           Sign In
         </a>
+        {props.sign !== undefined ? <SignOut /> : ''}
       </div>
     </nav>
   )

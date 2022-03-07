@@ -11,11 +11,13 @@ import { useParams, useLocation, useMatch } from 'react-router-dom'
 import './Dashboard.css'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
+import SignOut from '../../components/signOut/SignOut'
 
 const Dashboard = () => {
+  const sign = true
   return (
     <div className="Dashboard">
-      <Header />
+      <Header sign={sign} />
       <main className="main bg-dark ">
         <div className="header">
           <h1>
