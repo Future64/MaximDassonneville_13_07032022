@@ -5,19 +5,19 @@ import Home from '../../pages/home/Home'
 import SignInPage from '../../pages/signIn-page/SignInPage'
 import Error404 from '../../pages/error404/Error404'
 
-import './App.css';
+import './App.css'
 
 function App() {
   return (
     <div className="App">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard/:id" element={<Dashboard />} />
-            <Route path="/signin" element={<SignInPage />} />
-            <Route path="*" element={<Error404 />} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="*" element={<Error404 />} />
+      </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
