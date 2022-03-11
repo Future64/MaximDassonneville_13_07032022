@@ -12,6 +12,7 @@ import './Dashboard.css'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import SignOut from '../../components/signOut/SignOut'
+import HeadDashboard from '../../components/headDashboard/HeadDashboard'
 
 const Dashboard = () => {
   const sign = true
@@ -19,14 +20,7 @@ const Dashboard = () => {
     <div className="Dashboard">
       <Header sign={sign} />
       <main className="main bg-dark ">
-        <div className="header">
-          <h1>
-            Welcome back
-            <br />
-            Tony Jarvis!
-          </h1>
-          <button className="edit-button">Edit Name</button>
-        </div>
+        <HeadDashboard />
         <h2 className="sr-only">Accounts</h2>
         <section className="account">
           <div className="account-content-wrapper">
