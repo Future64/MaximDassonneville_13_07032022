@@ -17,11 +17,10 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import './InputForm.css'
 import { setEmail, setToken } from '../../redux/reducer'
+import axios from 'axios'
 
 const InputForm = () => {
   const navigate = useNavigate()
-
-  //-----------------------------------------------------------------------
 
   const token = useSelector((state) => state.user.token)
   const dispatch = useDispatch()
@@ -30,101 +29,55 @@ const InputForm = () => {
     email: '',
     password: '',
   })
-  const [formIsSubmited, setFormIsSubmited] = useState(false)
-  const [submitError, setSubmitError] = useState(false)
 
   const handleInputChange = (event) => {
-    const inputName = event.target.id
+    const inputName = event.target.name
 
     setUserInputs({
       ...userInputs,
       [inputName]: event.target.value,
     })
-    setSubmitError(false)
   }
 
-  const handleLoginFormSubmit = (event) => {
-    event.preventDefault()
 
-    setFormIsSubmited(true)
-  }
 
-  console.log(
-    'userInputs =',
-    userInputs,
-    '| formIsSubmited',
-    formIsSubmited,
-    '| submitError =',
-    submitError
-  )
-
-  useEffect(() => {
-    if (formIsSubmited) {
-      const url = 'http://localhost:3001/api/v1/user/login'
-
-      const loginPayload = {
-        email: userInputs.email,
-        password: userInputs.password,
-      }
-
-      const requestOptions = {
-        method: 'POST',
-        body: JSON.stringify(loginPayload),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-
-      // Send POST request:
-      fetch(url, requestOptions)
-        .then((response) => response.json())
-        .then((json) => {
-          dispatch(setEmail(userInputs.email))
-          dispatch(setToken(json.body.token))
-
-          console.log('/user/login response to POST:', json)
-        })
-        .catch((error) => {
-          setSubmitError(true)
-
-          setUserInputs({
-            ...userInputs,
-          })
-
-          console.error(
-            `An error has occured while posting to /user/login: ${error}`
-          )
-        })
-
-      setFormIsSubmited(false)
+  async function login(e) {
+    e.preventDefault()
+    let res
+    await axios.post('http://localhost:3001/api/v1/user/login', userInputs)
+                                 .then(response => response.data.body.token)
+                                 .then(token => {window.localStorage.setItem('authToken', token); res = true})    
+                                 .catch(error => res = false) 
+    if (res) {
+      navigate("/profile")
+    } else {
+      navigate("/")
     }
-  }, [dispatch, userInputs, formIsSubmited])
-
-  const goDashboard = () => {
-    let url = '/profile'
-    navigate(url)
   }
-  if (token) return goDashboard()
 
-  //-----------------------------------------------------------------------
-
-  // const checkInput = (e) => {
-  //   console.log(e)
-  //   console.log(e.target.value)
-  // }
   return (
     <main className="main bg-dark noTopMargin">
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form onSubmit={handleLoginFormSubmit}>
+        <form onSubmit={(e) => login(e)}>
           <div className="input-wrapper">
             <label htmlFor="email">Username</label>
-            <input type="email" id="email" onChange={handleInputChange} />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              onChange={handleInputChange}
+            />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" onChange={handleInputChange} />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              onChange={handleInputChange}
+            />
           </div>
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />
