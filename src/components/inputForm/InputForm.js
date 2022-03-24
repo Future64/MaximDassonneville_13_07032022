@@ -39,19 +39,21 @@ const InputForm = () => {
     })
   }
 
-
-
   async function login(e) {
     e.preventDefault()
     let res
-    await axios.post('http://localhost:3001/api/v1/user/login', userInputs)
-                                 .then(response => response.data.body.token)
-                                 .then(token => {window.localStorage.setItem('authToken', token); res = true})    
-                                 .catch(error => res = false) 
+    await axios
+      .post('http://localhost:3001/api/v1/user/login', userInputs)
+      .then((response) => response.data.body.token)
+      .then((token) => {
+        window.localStorage.setItem('authToken', token)
+        res = true
+      })
+      .catch((error) => (res = false))
     if (res) {
-      navigate("/profile")
+      navigate('/profile')
     } else {
-      navigate("/")
+      navigate('/')
     }
   }
 
