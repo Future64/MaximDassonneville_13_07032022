@@ -5,9 +5,10 @@ import './SignInBox.css'
 
 const SignInBox = () => {
   return (
-    <>
-    
-    </>
+    <a className="main-nav-item" href="/signin">
+      <i className="fa fa-user-circle"></i>
+    Sign In
+  </a>
   )
 }
 export default SignInBox

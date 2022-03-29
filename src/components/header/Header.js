@@ -11,6 +11,7 @@ import { useParams, useLocation, useMatch } from 'react-router-dom'
 import './Header.css'
 import argentBankLogo from '../../assets/argentBankLogo.png'
 import SignOut from '../signOut/SignOut'
+import SignInBox from '../signInBox/SignInBox'
 
 const Header = (props) => {
   return (
@@ -24,11 +25,8 @@ const Header = (props) => {
         <h1 className="sr-only">Argent Bank</h1>
       </a>
       <div>
-        <a className="main-nav-item" href="/signin">
-          <i className="fa fa-user-circle"></i>
-          Sign In
-        </a>
-        {props.sign !== undefined ? <SignOut /> : ''}
+
+        {props.sign !== undefined ? <SignOut /> : <SignInBox />}
       </div>
     </nav>
   )
