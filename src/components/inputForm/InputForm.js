@@ -3,7 +3,7 @@ import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import './InputForm.css'
-import { setEmail, setToken } from '../../redux/reducer'
+// import { setEmail, setToken } from '../../redux/reducer'
 import axios from 'axios'
 import {loginRequest, profileRequest} from '../../services/apiRequest'
 
@@ -45,10 +45,6 @@ const InputForm = () => {
     navigateTo(tokenState)
   }
   
-  // useEffect(async() => {
-  //   await profileRequest(tokenState)
-
-  // })
 
 
   return (

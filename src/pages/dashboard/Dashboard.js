@@ -8,19 +8,61 @@ import {
   useCallback,
 } from 'react'
 import { useParams, useLocation, useMatch } from 'react-router-dom'
+import axios from 'axios'
 import './Dashboard.css'
+import { setFirstName, setLastName } from '../../redux/reducer'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import SignOut from '../../components/signOut/SignOut'
 import HeadDashboard from '../../components/headDashboard/HeadDashboard'
+import {profileRequest} from '../../services/apiRequest'
+import { useDispatch } from 'react-redux'
 
 const Dashboard = () => {
   const sign = true
+  const PROFILE_URL = 'http://localhost:3001/api/v1/user/profile'
+  const dispatch = useDispatch()
+  const [userResult, setUserResult] = useState()
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: ""
+  })
+
+  // async function getProfile(){
+  //   let response = await profileRequest()
+  //   console.log(response)
+  // }
+
+  useEffect(async () => {
+    // await getProfile()
+
+    await axios
+    .post(PROFILE_URL,
+        {}
+      )
+      .then((response) => {
+        setUserResult(response)
+        setUserData({
+          firstName: response.data.body.firstName,
+          lastName: response.data.body.lastName
+        })
+        dispatch(setFirstName(response.data.body.firstName))
+        dispatch(setLastName(response.data.body.lastName))
+        return response
+    })
+    .catch((error) => {
+      console.log(error)
+        return error
+    })
+  },[])
+  console.log(userResult)
+
+
   return (
     <div className="Dashboard">
       <Header sign={sign} />
       <main className="main bg-dark ">
-        <HeadDashboard />
+        <HeadDashboard user={userData}/>
         <h2 className="sr-only">Accounts</h2>
         <section className="account">
           <div className="account-content-wrapper">

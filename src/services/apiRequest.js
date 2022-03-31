@@ -8,27 +8,25 @@ export const loginRequest = async(userInputs) => {
   .post(LOGIN_URL, userInputs)
   .then((response) => {
     window.localStorage.setItem('authToken', JSON.stringify(response.data.body.token))
-    console.log(response)
+    axios.defaults.headers['Authorization'] = 'Bearer ' + response.data.body.token
     return response
   })
   .catch((error) => error.response.data)
 }
 
-export const profileRequest = async(token) => {
+export const profileRequest = async() => {
+  let data
   await axios
   .post(PROFILE_URL,
-      {},
-      {
-        headers: {
-            Authorization: `Bearer ` + token,
-        },
-      }
+      {}
     )
     .then((response) => {
-      console.log(response)
-      return response
+      console.log(response.data)
+      data = response
+      return data
   })
   .catch((error) => {
-      return error.response
+    console.log(error)
+      return error
   })
 }

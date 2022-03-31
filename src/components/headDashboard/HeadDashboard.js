@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useRef } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './HeadDashboard.css'
 
-const HeadDashboard = () => {
+const HeadDashboard = ({user}) => {
   const [toggle, setToggle] = useState(false)
 
   const changeToggle = () => {
@@ -14,7 +14,7 @@ const HeadDashboard = () => {
       <h1>
         Welcome back
         <br />
-        Tony Jarvis!
+        {user !== undefined ? `${user.firstName} ${user.lastName}` : "Tony Jarvis!"}
       </h1>
       <button className="edit-button " onClick={changeToggle}>
         Edit Name
