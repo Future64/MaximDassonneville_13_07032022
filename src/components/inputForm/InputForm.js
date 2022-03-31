@@ -1,61 +1,55 @@
-import React from 'react'
-import {
-  useState,
-  useEffect,
-  useContext,
-  useRef,
-  useMemo,
-  useCallback,
-} from 'react'
-import {
-  useParams,
-  useLocation,
-  useMatch,
-  useHistory,
-  useNavigate,
-} from 'react-router-dom'
+import React, { useEffect } from 'react'
+import {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import './InputForm.css'
 import { setEmail, setToken } from '../../redux/reducer'
 import axios from 'axios'
+import {loginRequest, profileRequest} from '../../services/apiRequest'
 
 const InputForm = () => {
+  // Hooks
   const navigate = useNavigate()
-
-  const token = useSelector((state) => state.user.token)
   const dispatch = useDispatch()
 
+  // State
+  const token = useSelector((state) => state.user.token)
+  const [tokenState, setTokenState] = useState('')
   const [userInputs, setUserInputs] = useState({
     email: '',
     password: '',
   })
 
-  const handleInputChange = (event) => {
-    const inputName = event.target.name
+  //==========> FUNCTION <==========\\
 
+  function handleInputChange(event) {
+    const inputName = event.target.name
     setUserInputs({
       ...userInputs,
       [inputName]: event.target.value,
     })
   }
 
-  async function login(e) {
-    e.preventDefault()
-    let res
-    await axios
-      .post('http://localhost:3001/api/v1/user/login', userInputs)
-      .then((response) => response.data.body.token)
-      .then((token) => {
-        window.localStorage.setItem('authToken', token)
-        res = true
-      })
-      .catch((error) => (res = false))
-    if (res) {
+  function navigateTo(tokenState){
+    if (tokenState !== undefined) {
       navigate('/profile')
     } else {
       navigate('/')
     }
   }
+
+  async function login(e) {
+    e.preventDefault()
+    await loginRequest(userInputs)
+    setTokenState(window.localStorage.getItem('authToken'))
+    navigateTo(tokenState)
+  }
+  
+  // useEffect(async() => {
+  //   await profileRequest(tokenState)
+
+  // })
+
 
   return (
     <main className="main bg-dark noTopMargin">
