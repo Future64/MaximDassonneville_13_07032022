@@ -10,17 +10,18 @@ import {
 import { useParams, useLocation, useMatch } from 'react-router-dom'
 import axios from 'axios'
 import './Dashboard.css'
-import { setFirstName, setLastName } from '../../redux/reducer'
+import { setFirstName, setLastName, setEmail, setToken } from '../../redux/reducer'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import SignOut from '../../components/signOut/SignOut'
 import HeadDashboard from '../../components/headDashboard/HeadDashboard'
 import {profileRequest} from '../../services/apiRequest'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Dashboard = () => {
   const sign = true
   const PROFILE_URL = 'http://localhost:3001/api/v1/user/profile'
+  // const user = useSelector((state) => console.log(state))
   const dispatch = useDispatch()
   const [userResult, setUserResult] = useState()
   const [userData, setUserData] = useState({

@@ -5,6 +5,8 @@ export const userSlice = createSlice({
   initialState: {
     firstName: '',
     lastName: '',
+    email: '',
+    token: '',
   },
   reducers: {
     setFirstName: (state, action) => {
@@ -13,9 +15,15 @@ export const userSlice = createSlice({
     setLastName: (state, action) => {
       state.lastName = action.payload
     },
+    setEmail: (state, action) => {
+      state.email = action.payload
+    },
+    setToken: (state, action) => {
+      state.token = action.payload
+    },
   },
 })
 
-export const { setFirstName, setLastName } = userSlice.actions
+export const { setFirstName, setLastName, setEmail, setToken } = userSlice.actions
 
 export const userReducer = userSlice.reducer
