@@ -15,40 +15,25 @@ import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import SignOut from '../../components/signOut/SignOut'
 import HeadDashboard from '../../components/headDashboard/HeadDashboard'
-import {profileRequest} from '../../services/apiRequest'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Dashboard = () => {
   const sign = true
   const PROFILE_URL = 'http://localhost:3001/api/v1/user/profile'
-  // const user = useSelector((state) => console.log(state))
+  const user = useSelector((state) => {return state})
   const dispatch = useDispatch()
   const [userResult, setUserResult] = useState()
-  const [userData, setUserData] = useState({
-    firstName: "",
-    lastName: ""
-  })
-
-  // async function getProfile(){
-  //   let response = await profileRequest()
-  //   console.log(response)
-  // }
 
   useEffect(async () => {
-    // await getProfile()
-
     await axios
     .post(PROFILE_URL,
         {}
       )
       .then((response) => {
         setUserResult(response)
-        setUserData({
-          firstName: response.data.body.firstName,
-          lastName: response.data.body.lastName
-        })
         dispatch(setFirstName(response.data.body.firstName))
         dispatch(setLastName(response.data.body.lastName))
+        dispatch(setEmail(response.data.body.email))
         return response
     })
     .catch((error) => {
@@ -56,14 +41,14 @@ const Dashboard = () => {
         return error
     })
   },[])
-  console.log(userResult)
+  console.log(user)
 
 
   return (
     <div className="Dashboard">
       <Header sign={sign} />
       <main className="main bg-dark ">
-        <HeadDashboard user={userData}/>
+        <HeadDashboard />
         <h2 className="sr-only">Accounts</h2>
         <section className="account">
           <div className="account-content-wrapper">

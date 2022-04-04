@@ -3,22 +3,30 @@ import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import './InputForm.css'
-// import { setEmail, setToken } from '../../redux/reducer'
+import { setFirstName, setLastName, setEmail, setToken, setConnecting } from '../../redux/reducer'
 import axios from 'axios'
-import {loginRequest, profileRequest} from '../../services/apiRequest'
+
 
 const InputForm = () => {
   // Hooks
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  // State
-  const token = useSelector((state) => state.user.token)
-  const [tokenState, setTokenState] = useState('')
+  // Const & let
+  const LOGIN_URL = 'http://localhost:3001/api/v1/user/login'
+  const usernameInput = document.querySelector("#email")
+  const passwordInput = document.querySelector("#password")
+
+  // Store
+  const user = useSelector((state) => {return state})
+
+  // Local state
+  const [messageError, setMessageError] = useState('')
   const [userInputs, setUserInputs] = useState({
     email: '',
     password: '',
   })
+  
 
   //==========> FUNCTION <==========\\
 
@@ -28,21 +36,35 @@ const InputForm = () => {
       ...userInputs,
       [inputName]: event.target.value,
     })
+    if(event.target.value.length == 0 ){
+      setMessageError('You must fill all the fields')
+    } else {
+      setMessageError('')
+    }
   }
 
   function navigateTo(tokenState){
-    if (tokenState !== undefined) {
+    if (tokenState !== null) {
+      dispatch(setConnecting(true))
       navigate('/profile')
-    } else {
-      navigate('/')
-    }
+    } 
+  }
+
+ const loginRequest = async(userInputs) => {
+    await axios
+    .post(LOGIN_URL, userInputs)
+    .then((response) => {
+      window.localStorage.setItem('authToken', JSON.stringify(response.data.body.token))
+      axios.defaults.headers['Authorization'] = 'Bearer ' + response.data.body.token
+    })
+    .catch((error) => setMessageError("Username or password is not correct!"))
   }
 
   async function login(e) {
     e.preventDefault()
     await loginRequest(userInputs)
-    setTokenState(window.localStorage.getItem('authToken'))
-    navigateTo(tokenState)
+    dispatch(setToken(window.localStorage.getItem('authToken')))
+    navigateTo(window.localStorage.getItem('authToken'))
   }
   
 
@@ -75,6 +97,9 @@ const InputForm = () => {
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
+
+          <span className="msgErr">{messageError}</span>
+
           <button className="sign-in-button" type="submit">
             Sign In
           </button>

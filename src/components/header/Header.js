@@ -8,12 +8,16 @@ import {
   useCallback,
 } from 'react'
 import { useParams, useLocation, useMatch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import './Header.css'
 import argentBankLogo from '../../assets/argentBankLogo.png'
 import SignOut from '../signOut/SignOut'
 import SignInBox from '../signInBox/SignInBox'
 
-const Header = (props) => {
+const Header = () => {
+  const user = useSelector((state) => {return state})
+  const location = useLocation()
+
   return (
     <nav className="main-nav">
       <a className="main-nav-logo" href="/">
@@ -26,7 +30,7 @@ const Header = (props) => {
       </a>
       <div>
 
-        {props.sign !== undefined ? <SignOut /> : <SignInBox />}
+        {location.pathname === "/profile" ? <><SignInBox /> <SignOut /></> : <SignInBox />}
       </div>
     </nav>
   )
