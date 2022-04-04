@@ -1,24 +1,14 @@
 import React from 'react'
-import {
-  useState,
-  useEffect,
-  useContext,
-  useRef,
-  useMemo,
-  useCallback,
-} from 'react'
-import { useParams, useLocation, useMatch } from 'react-router-dom'
+import {useState, useEffect} from 'react'
 import axios from 'axios'
 import './Dashboard.css'
 import { setFirstName, setLastName, setEmail, setToken } from '../../redux/reducer'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
-import SignOut from '../../components/signOut/SignOut'
 import HeadDashboard from '../../components/headDashboard/HeadDashboard'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Dashboard = () => {
-  const sign = true
   const PROFILE_URL = 'http://localhost:3001/api/v1/user/profile'
   const user = useSelector((state) => {return state})
   const dispatch = useDispatch()
@@ -26,9 +16,7 @@ const Dashboard = () => {
 
   useEffect(async () => {
     await axios
-    .post(PROFILE_URL,
-        {}
-      )
+    .post(PROFILE_URL,{})
       .then((response) => {
         setUserResult(response)
         dispatch(setFirstName(response.data.body.firstName))
@@ -46,7 +34,7 @@ const Dashboard = () => {
 
   return (
     <div className="Dashboard">
-      <Header sign={sign} />
+      <Header />
       <main className="main bg-dark ">
         <HeadDashboard />
         <h2 className="sr-only">Accounts</h2>

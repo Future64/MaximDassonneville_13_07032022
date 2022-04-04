@@ -8,34 +8,21 @@ import axios from 'axios'
 
 
 const InputForm = () => {
-  // Hooks
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  // Const & let
   const LOGIN_URL = 'http://localhost:3001/api/v1/user/login'
   const usernameInput = document.querySelector("#email")
   const passwordInput = document.querySelector("#password")
-
-  // Store
   const user = useSelector((state) => {return state})
-
-  // Local state
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [messageError, setMessageError] = useState('')
   const [userInputs, setUserInputs] = useState({
     email: '',
     password: '',
   })
   
-
-  //==========> FUNCTION <==========\\
-
   function handleInputChange(event) {
     const inputName = event.target.name
-    setUserInputs({
-      ...userInputs,
-      [inputName]: event.target.value,
-    })
+    setUserInputs({...userInputs, [inputName]: event.target.value,})
     if(event.target.value.length == 0 ){
       setMessageError('You must fill all the fields')
     } else {
@@ -66,8 +53,6 @@ const InputForm = () => {
     dispatch(setToken(window.localStorage.getItem('authToken')))
     navigateTo(window.localStorage.getItem('authToken'))
   }
-  
-
 
   return (
     <main className="main bg-dark noTopMargin">

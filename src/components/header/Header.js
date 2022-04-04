@@ -1,12 +1,4 @@
 import React from 'react'
-import {
-  useState,
-  useEffect,
-  useContext,
-  useRef,
-  useMemo,
-  useCallback,
-} from 'react'
 import { useParams, useLocation, useMatch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import './Header.css'
@@ -29,8 +21,12 @@ const Header = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </a>
       <div>
-
-        {location.pathname === "/profile" ? <><SignInBox /> <SignOut /></> : <SignInBox />}
+        {location.pathname === "/profile" 
+          ? <>
+              <SignInBox /> 
+              <SignOut />
+            </> 
+          : <SignInBox />}
       </div>
     </nav>
   )
