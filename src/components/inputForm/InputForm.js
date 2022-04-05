@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import {useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import './InputForm.css'
@@ -37,7 +36,7 @@ const InputForm = () => {
     } 
   }
 
- const loginRequest = async(userInputs) => {
+  async function loginRequest(userInputs) {
     await axios
     .post(LOGIN_URL, userInputs)
     .then((response) => {

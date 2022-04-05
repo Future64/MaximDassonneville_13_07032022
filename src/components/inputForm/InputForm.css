@@ -1,7 +1,13 @@
 .noTopMargin {
     /* Ajout */
     position: relative;
-    height: 89vh;
+    height: 93vh;
+}
+
+@media (max-height: 918px) {
+    .noTopMargin {
+        height: 86vh;
+    }
 }
 
 .sign-in-button {
@@ -62,4 +68,6 @@
     margin-top: 5px;
     color: red;
     font-weight: 600;
+    font-size: 15px;
+    margin-bottom: -9px;
 }

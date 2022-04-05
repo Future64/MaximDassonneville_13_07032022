@@ -10,6 +10,19 @@ const Header = () => {
   const user = useSelector((state) => {return state})
   const location = useLocation()
 
+  function displaySignInHeader(){
+    if (location.pathname === "/profile"){
+      return (
+        <>
+          <SignInBox /> 
+          <SignOut />
+        </> 
+      )
+    } else {
+        return <SignInBox />
+      }
+    }
+  
   return (
     <nav className="main-nav">
       <a className="main-nav-logo" href="/">
@@ -21,12 +34,7 @@ const Header = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </a>
       <div>
-        {location.pathname === "/profile" 
-          ? <>
-              <SignInBox /> 
-              <SignOut />
-            </> 
-          : <SignInBox />}
+        {displaySignInHeader()}
       </div>
     </nav>
   )
