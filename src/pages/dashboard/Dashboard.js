@@ -26,11 +26,10 @@ const Dashboard = () => {
         return response
     })
     .catch((error) => {
-      console.log(error)
         return error
     })
   },[])
-  console.log(user)
+
 
 
   return (

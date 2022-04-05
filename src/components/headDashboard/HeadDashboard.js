@@ -9,27 +9,27 @@ const HeadDashboard = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => {return state})
   const [toggle, setToggle] = useState(false)
-  const [userNames, setUserNames] = useState({
-    firstname: '',
-    lastname: ''
+  const [userInputsProfile, setUserInputsProfile] = useState({
+    firstName: '',
+    lastName: ''
   })
+
+  const firstName = userInputsProfile.firstName
+  const lastName = userInputsProfile.lastName
 
   async function putRequest() {
     return axios
     .put(
       LOGIN_PROFILE,
-        { userNames },
-        {
-            headers: {
-                Authorization: `Bearer ` + user.user.token,
-            }
-        }
+        { firstName, lastName },
     )
     .then(function (response) {
+      console.log(response)
         return response;
     })
     .catch(function (error) {
-        return error.response;
+      console.log(error.message)
+        return error.message;
     });
 }
   
@@ -38,14 +38,22 @@ const HeadDashboard = () => {
     toggle === false ? setToggle(true) : setToggle(false)
   }
 
-  const changeName = () => {
-    const inputFirstName = document.querySelector(".firstName").value
-    const inputFamilyName = document.querySelector(".familyName").value
-    dispatch(setFirstName(inputFirstName))
-    dispatch(setLastName(inputFamilyName))
+  function handleInputChange(event) {
+    const inputName = event.target.name
+    setUserInputsProfile({...userInputsProfile, [inputName]: event.target.value,})
+
+  }
+
+  const changeName = async(e) => {
+    e.preventDefault()
+    const response = await putRequest()
+    console.log(response)
+    dispatch(setFirstName(response.data.body.firstName))
+    dispatch(setLastName(response.data.body.lastName))
     changeToggle()
   }
 
+  
   const welcome = (
     <>
       <h1>
@@ -62,11 +70,11 @@ const HeadDashboard = () => {
   const editZone = (
     <>
       <h1>Welcome back</h1>
-      <form>
-      <input className="firstName input" type="text" name="firstName" placeholder="tony" />
-      <input className="familyName input" type="text" name="familyName" placeholder="Jarvis" />
+      <form onSubmit={e => changeName(e)}>
+      <input className="firstName input" type="text" name="firstName" placeholder="tony" onChange={handleInputChange}/>
+      <input className="familyName input" type="text" name="lastName" placeholder="Jarvis" onChange={handleInputChange}/>
       <div className="buttonBox">
-        <button className="save-button btn"  onClick={changeName}>
+        <button className="save-button btn"  type="submit" >
           Save
         </button>
         <button className="cancel-button btn" onClick={changeToggle}>

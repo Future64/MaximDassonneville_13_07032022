@@ -9,11 +9,11 @@ const SignInBox = () => {
   const user = useSelector((state) => {return state})
   return (
     <a className="main-nav-item" 
-      href={user.user.connecting === false 
+      href={!window.localStorage.getItem('authToken')
         ? "/signin" 
         : "/profile"}>
           <i className="fa fa-user-circle"></i>
-          {user.user.connecting === false 
+          {!window.localStorage.getItem('authToken') 
             ? "Sign In" 
             : user.user.firstName}
    </a>
