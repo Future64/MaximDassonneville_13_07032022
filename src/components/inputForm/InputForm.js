@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import './InputForm.css'
-import { setFirstName, setLastName, setEmail, setToken, setConnecting } from '../../redux/reducer'
+import { setFirstName, setLastName, setEmail, setToken } from '../../redux/reducer'
 import axios from 'axios'
 
 
 const InputForm = () => {
   const LOGIN_URL = 'http://localhost:3001/api/v1/user/login'
-  const usernameInput = document.querySelector("#email")
-  const passwordInput = document.querySelector("#password")
   const user = useSelector((state) => {return state})
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -31,7 +29,6 @@ const InputForm = () => {
 
   function navigateTo(tokenState){
     if (tokenState !== null) {
-      dispatch(setConnecting(true))
       navigate('/profile')
     } 
   }

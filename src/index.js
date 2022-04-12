@@ -7,10 +7,11 @@ import { store } from './redux/store'
 import App from './components/app/App'
 import reportWebVitals from './reportWebVitals'
 
+
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+        <App />
     </Provider>
   </BrowserRouter>,
   document.getElementById('root')

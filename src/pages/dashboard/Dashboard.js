@@ -15,7 +15,7 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const [userResult, setUserResult] = useState()
 
-  useEffect(async () => {
+  async function postRequest(){
     await axios
     .post(PROFILE_URL,{})
       .then((response) => {
@@ -28,6 +28,10 @@ const Dashboard = () => {
     .catch((error) => {
         return error
     })
+  }
+
+  useEffect(async () => {
+    await postRequest()
   },[])
 
 
