@@ -1,15 +1,5 @@
 import React from 'react'
-import {
-  useState,
-  useEffect,
-  useContext,
-  useRef,
-  useMemo,
-  useCallback,
-} from 'react'
-import { useParams, useLocation, useMatch } from 'react-router-dom'
 import './SectionHome.css'
-import banktree from '../../assets/bank-tree.jpeg'
 import iconChat from '../../assets/icon-chat.png'
 import iconMoney from '../../assets/icon-money.png'
 import iconSecurity from '../../assets/icon-security.png'

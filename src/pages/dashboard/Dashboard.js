@@ -2,8 +2,8 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import './Dashboard.css'
-import { setFirstName, setLastName, setEmail, setToken } from '../../redux/reducer'
-import { useDispatch, useSelector } from 'react-redux'
+import { setFirstName, setLastName, setEmail} from '../../redux/reducer'
+import { useDispatch } from 'react-redux'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import HeadDashboard from '../../components/headDashboard/HeadDashboard'
@@ -11,7 +11,6 @@ import CardProfile from '../../components/cardProfile/CardProfile'
 
 const Dashboard = () => {
   const PROFILE_URL = 'http://localhost:3001/api/v1/user/profile'
-  const user = useSelector((state) => {return state})
   const dispatch = useDispatch()
   const [userResult, setUserResult] = useState()
 

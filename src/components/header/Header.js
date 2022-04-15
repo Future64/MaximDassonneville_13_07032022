@@ -1,20 +1,12 @@
 import React from 'react'
-import { useParams, useLocation, useMatch } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
+import { useLocation} from 'react-router-dom'
 import './Header.css'
-import { setFirstName, setLastName, setEmail, setToken } from '../../redux/reducer'
 import argentBankLogo from '../../assets/argentBankLogo.png'
 import SignOut from '../signOut/SignOut'
 import SignInBox from '../signInBox/SignInBox'
 
 const Header = () => {
   const location = useLocation()
-  const dispatch = useDispatch()
-  const PROFILE_URL = 'http://localhost:3001/api/v1/user/profile'
-  const user = useSelector((state) => {return state})
-  const token = window.localStorage.getItem('authToken')
-
 
 
   function displaySignInHeader(){

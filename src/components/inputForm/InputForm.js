@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import {useNavigate} from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import './InputForm.css'
-import { setFirstName, setLastName, setEmail, setToken } from '../../redux/reducer'
+import {setToken } from '../../redux/reducer'
 import axios from 'axios'
 
 
 const InputForm = () => {
   const LOGIN_URL = 'http://localhost:3001/api/v1/user/login'
-  const user = useSelector((state) => {return state})
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [messageError, setMessageError] = useState('')

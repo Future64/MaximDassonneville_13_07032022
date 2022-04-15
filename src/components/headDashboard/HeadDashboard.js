@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext, useRef } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { setFirstName, setLastName, setEmail, setToken } from '../../redux/reducer'
+import { setFirstName, setLastName } from '../../redux/reducer'
 import './HeadDashboard.css'
 
 const HeadDashboard = () => {

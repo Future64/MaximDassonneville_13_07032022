@@ -1,8 +1,5 @@
 import React from 'react'
-import { useState, useEffect, useContext, useRef, useMemo, useCallback } from 'react'
-import { useParams, useLocation, useMatch} from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { setFirstName, setLastName, setEmail, setToken, setConnecting } from '../../redux/reducer'
+import { useSelector } from 'react-redux'
 import './SignInBox.css'
 
 const SignInBox = () => {
