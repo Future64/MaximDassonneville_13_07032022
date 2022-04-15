@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {useSelector } from 'react-redux'
 import './Home.css'
 import Header from '../../components/header/Header'
 import Sectionhome from '../../components/sectionHome/SectionHome'
