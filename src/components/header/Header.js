@@ -9,6 +9,12 @@ const Header = () => {
   const location = useLocation()
 
 
+/**
+ * If the user is on the profile page, display the sign in box and the sign out button. If the user is
+ * on any other page, display the sign in box
+ * @returns the SignInBox component if the pathname is not equal to "/profile". If the pathname is
+ * equal to "/profile", the function is returning the SignInBox component and the SignOut component.
+ */
   function displaySignInHeader(){
     if (location.pathname === "/profile"){
       return (

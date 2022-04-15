@@ -14,6 +14,10 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const [userResult, setUserResult] = useState()
 
+/**
+ * This function makes a post request to the server, and then sets the user's first name, last name,
+ * and email in the redux store
+ */
   async function postRequest(){
     await axios
     .post(PROFILE_URL,{})

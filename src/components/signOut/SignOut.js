@@ -4,6 +4,9 @@ import './SignOut.css'
 
 const SignOut = () => {
  
+/**
+ * It deletes the authToken from localStorage and removes the Authorization header from axios
+ */
   const deleteStorage = () => {
     window.localStorage.removeItem('authToken');
     delete axios.defaults.headers['Authorization'];

@@ -17,6 +17,11 @@ const HeadDashboard = () => {
   const firstName = userInputsProfile.firstName
   const lastName = userInputsProfile.lastName
 
+/**
+ * The function putRequest() is a PUT request to the LOGIN_PROFILE
+ * endpoint. The request body is an object with the firstName and lastName properties
+ * @returns The response from the server.
+ */
   async function putRequest() {
     return axios
     .put(
@@ -33,27 +38,39 @@ const HeadDashboard = () => {
     });
 }
   
-
+/**
+ * If toggle is false, set toggle to true, otherwise set toggle to false
+ */
   const changeToggle = () => {
     toggle === false ? setToggle(true) : setToggle(false)
   }
 
+/**
+ * A function that handles the input change.
+ * @param event - the event that triggered the function
+ */
   function handleInputChange(event) {
     const inputName = event.target.name
     setUserInputsProfile({...userInputsProfile, [inputName]: event.target.value,})
 
   }
 
+/**
+ * Makes a request to the server, and then dispatches
+ * the response to the reducer
+ * @param e - the event object
+ */
   const changeName = async(e) => {
     e.preventDefault()
     const response = await putRequest()
-    console.log(response)
     dispatch(setFirstName(response.data.body.firstName))
     dispatch(setLastName(response.data.body.lastName))
     changeToggle()
   }
 
   
+/* A ternary operator that checks if the user is undefined. If it is, it will display the name Tony
+Jarvis. If it is not undefined, it will display the user's first and last name. */
   const welcome = (
     <>
       <h1>
@@ -67,6 +84,7 @@ const HeadDashboard = () => {
     </>
   )
 
+/* A function that returns a form to change the firstName and LastName. */
   const editZone = (
     <>
       <h1>Welcome back</h1>

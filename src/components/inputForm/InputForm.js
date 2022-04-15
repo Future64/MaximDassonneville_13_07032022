@@ -16,6 +16,11 @@ const InputForm = () => {
     password: '',
   })
   
+/**
+ * It takes the name of the input and the value of the input and sets the state of the userInputs
+ * object to the value of the input
+ * @param event - the event that triggered the function
+ */
   function handleInputChange(event) {
     const inputName = event.target.name
     setUserInputs({...userInputs, [inputName]: event.target.value,})
@@ -26,12 +31,21 @@ const InputForm = () => {
     }
   }
 
+/**
+ * If the tokenState is not null, navigate to the profile page
+ * @param tokenState - Try to fetch token in local storage
+ */
   function navigateTo(tokenState){
     if (tokenState !== null) {
       navigate('/profile')
     } 
   }
 
+/**
+ * It sends a POST request to the server with the user's inputs, and if the request is successful, it
+ * saves the token in the local storage and sets the Authorization header to the token
+ * @param userInputs - an object that contains the username and password of the user.
+ */
   async function loginRequest(userInputs) {
     await axios
     .post(LOGIN_URL, userInputs)
@@ -42,6 +56,10 @@ const InputForm = () => {
     .catch((error) => setMessageError("Username or password is not correct!"))
   }
 
+/**
+ * It takes the user inputs, sends them to the server, and then sets the token in the state
+ * @param e - the event object
+ */
   async function login(e) {
     e.preventDefault()
     await loginRequest(userInputs)
