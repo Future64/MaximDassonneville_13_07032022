@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation} from 'react-router-dom'
+import { useLocation, NavLink} from 'react-router-dom'
 import './Header.css'
 import argentBankLogo from '../../assets/argentBankLogo.png'
 import SignOut from '../signOut/SignOut'
@@ -30,14 +30,17 @@ const Header = () => {
   
   return (
     <nav className="main-nav">
-      <a className="main-nav-logo" href="/">
-        <img
-          className="main-nav-logo-image"
-          src={argentBankLogo}
-          alt="Argent Bank Logo"
-        />
-        <h1 className="sr-only">Argent Bank</h1>
-      </a>
+      <NavLink
+            to="/"
+            className="main-nav-logo"
+          >
+          <img
+            className="main-nav-logo-image"
+            src={argentBankLogo}
+            alt="Argent Bank Logo"
+          />
+          <h1 className="sr-only">Argent Bank</h1>
+      </NavLink>
       <div>
         {displaySignInHeader()}
       </div>

@@ -89,13 +89,25 @@ Jarvis. If it is not undefined, it will display the user's first and last name. 
     <>
       <h1>Welcome back</h1>
       <form onSubmit={e => changeName(e)}>
-      <input className="firstName input" type="text" name="firstName" placeholder="tony" onChange={handleInputChange}/>
-      <input className="familyName input" type="text" name="lastName" placeholder="Jarvis" onChange={handleInputChange}/>
+      <input className="firstName input" 
+             type="text" 
+             name="firstName" 
+             placeholder="tony" 
+             onChange={handleInputChange}/>
+
+      <input className="familyName input" 
+             type="text" 
+             name="lastName" 
+             placeholder="Jarvis" 
+             onChange={handleInputChange}/>
+
       <div className="buttonBox">
-        <button className="save-button btn"  type="submit" >
-          Save
+        <button className="save-button btn"  
+                type="submit" >
+                Save
         </button>
-        <button className="cancel-button btn" onClick={changeToggle}>
+        <button className="cancel-button btn" 
+                onClick={changeToggle}>
           Cancel
         </button>
       </div>
@@ -103,7 +115,11 @@ Jarvis. If it is not undefined, it will display the user's first and last name. 
     </>
   )
 
-  return <div className="header">{toggle == false ? welcome : editZone}</div>
+  return <div className="header">
+    {toggle == false 
+    ? welcome 
+    : editZone}
+    </div>
 }
 
 export default HeadDashboard
