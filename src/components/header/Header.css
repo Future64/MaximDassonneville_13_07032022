@@ -37,3 +37,13 @@
 .fa-user-circle {
     margin-right: 4px;
 }
+
+@media (max-width: 409px) {
+    .main-nav a {
+        font-size: 13px;
+    }
+    .main-nav-logo-image {
+        max-width: 100%;
+        width: 100px;
+    }
+}

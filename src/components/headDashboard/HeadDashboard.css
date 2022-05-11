@@ -49,3 +49,9 @@
 .cancel-button {
     margin-left: 5px;
 }
+
+@media (max-width: 409px){
+    .header {
+        font-size: 13px;
+    }
+}
